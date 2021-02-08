@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="https://wybiral.github.io/code-art/projects/tiny-mirror/index.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
 <link rel="icon" href="/files/icon2.svg" type="image/x-icon" />
-  <title>PHOTO EDİTİNG</title>
+  <title>PHOTOSHOP</title>
 </head>
 
 <div class="video-wrap" hidden="hidden">

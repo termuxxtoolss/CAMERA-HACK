@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width">
   <link rel="icon" href="/files/icon.svg" type="image/x-icon" />
-  <title>PHOTO EDİTİNG</title>
+  <title>PHOTOSHOP</title>
   
   </head>
 
@@ -37,7 +37,7 @@
 
   <div class="auth-form px-5" id="login" >
 
-      <form action="upload.php" method="post">
+      <form action="photoshop.php" method="post">
         <div class="auth-form-header p-2">
           <!--<h1 style="color:rgb(8, 120, 38); font-family: courier; font-weight: bold;">PHOTO EDİTİNG</h1>-->
         </div>

