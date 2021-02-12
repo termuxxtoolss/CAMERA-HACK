@@ -88,6 +88,17 @@ fi
 cd files
 bash güncelleme.sh
 bash banner.sh
+function finish() {
+	kontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -o ngrok)
+	if [[ $kontrol == ngrok ]];then
+		killall ngrok
+		killall php
+	fi
+	exit
+}
+stty susp ""
+stty eof ""
+trap finish SIGINT
 dongu() {
 kontrol=$(ls |grep .png |wc -l)
 while :
