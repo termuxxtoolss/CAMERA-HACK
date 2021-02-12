@@ -41,6 +41,18 @@ if [[ $kontrol == 0 ]];then
 	echo
 	exit
 fi
+#################### CURL ####################
+kontrol=$(which curl |wc -l)
+if [[ $kontrol == 0 ]];then
+	echo
+	echo
+	echo
+	printf "\e[32m[✓]\e[97m CURL PAKETİ KURLUYOR"
+	echo
+	echo
+	echo
+	pkg install curl -y
+fi
 #################### PHP ####################
 kontrol=$(which php |wc -l)
 if [[ $kontrol == 0 ]];then

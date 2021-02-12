@@ -37,6 +37,7 @@ if [[ $kontrol == 0 ]];then
 	echo
 	echo
 	echo
+	pkg install curl -y
 fi
 if [[ -a .log ]];then
 	kontrol=$(sed -n 4p .log |awk -F'.' '{print $1}')
