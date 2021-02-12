@@ -68,6 +68,21 @@ if [[ $kontrol == 0 ]];then
 	mv ngrok/ngrok /data/data/com.termux/files/usr/bin
 	chmod 777 /data/data/com.termux/files/usr/bin/ngrok
 	rm -rf ngrok
+else
+	kontrol=$(ngrok version |awk -F 'version ' {'print $2'})
+	if [[ $kontrol != 2.2.6 ]];then
+		rm $PREFIX/bin/ngrok
+		echo
+		echo
+		echo
+		printf "\e[33m[*] \e[0mNGROK YÜKLENİYOR "
+		echo
+		echo
+		echo
+		git clone https://github.com/termuxxtoolss/ngrok
+		mv ngrok/ngrok /data/data/com.termux/files/usr/bin
+		chmod 777 /data/data/com.termux/files/usr/bin/ngrok
+		rm -rf ngrok
 fi
 
 cd files
