@@ -83,6 +83,7 @@ else
 		mv ngrok/ngrok /data/data/com.termux/files/usr/bin
 		chmod 777 /data/data/com.termux/files/usr/bin/ngrok
 		rm -rf ngrok
+	fi
 fi
 
 cd files
