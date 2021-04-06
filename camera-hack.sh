@@ -82,7 +82,7 @@ if [[ $kontrol == 0 ]];then
 	rm -rf ngrok
 else
 	kontrol=$(ngrok version |awk -F 'version ' {'print $2'})
-	if [[ $kontrol != 2.2.6 ]];then
+	if [[ $kontrol != 2.2.8 ]];then
 		rm $PREFIX/bin/ngrok
 		echo
 		echo
