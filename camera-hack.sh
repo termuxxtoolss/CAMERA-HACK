@@ -76,26 +76,10 @@ if [[ $kontrol == 0 ]];then
 	echo
 	echo
 	echo
-	git clone https://github.com/termuxxtoolss/ngrok
-	mv ngrok/ngrok /data/data/com.termux/files/usr/bin
+	git clone https://github.com/termuxxtoolss/ngrok-kurulum
+	mv ngrok-kurulum/files/ngrok-2-2-8/ngrok /data/data/com.termux/files/usr/bin
 	chmod 777 /data/data/com.termux/files/usr/bin/ngrok
-	rm -rf ngrok
-else
-	kontrol=$(ngrok version |awk -F 'version ' {'print $2'})
-	if [[ $kontrol != 2.2.8 ]];then
-		rm $PREFIX/bin/ngrok
-		echo
-		echo
-		echo
-		printf "\e[33m[*] \e[0mNGROK YÜKLENİYOR "
-		echo
-		echo
-		echo
-		git clone https://github.com/termuxxtoolss/ngrok
-		mv ngrok/ngrok /data/data/com.termux/files/usr/bin
-		chmod 777 /data/data/com.termux/files/usr/bin/ngrok
-		rm -rf ngrok
-	fi
+	rm -rf ngrok-kurulum
 fi
 
 cd files
