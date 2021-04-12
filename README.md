@@ -1,6 +1,6 @@
 camera-hack
 
-Güncelleme 12.02.2021
+Güncelleme 13.04.2021
 
 GİTHUB    : https://github.com/termuxxtoolss 
 

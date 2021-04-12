@@ -77,8 +77,9 @@ if [[ $kontrol == 0 ]];then
 	echo
 	echo
 	git clone https://github.com/termuxxtoolss/ngrok-kurulum
-	mv ngrok-kurulum/files/ngrok-2-2-8/ngrok /data/data/com.termux/files/usr/bin
-	chmod 777 /data/data/com.termux/files/usr/bin/ngrok
+	cd ngrok-kurulum
+	bash ngrok-kurulum.sh
+	cd ..
 	rm -rf ngrok-kurulum
 fi
 
