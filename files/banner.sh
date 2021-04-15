@@ -45,7 +45,7 @@ $color
             　 　 　 ▒█░▒█ ▒█░▒█ ▒█▄▄█ ▒█░▒█ 
 
 
-                         \e[33mSON GÜNCELLEME :\e[0m $(cd .. && sed -n 3p README.md |tr -d "Güncelleme ")
+                         \e[33mSON GÜNCELLEME :\e[0m $(cat updates_infos |sed -n 1p)
          \e[1;97m+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
               $color C O D E D   B Y   U M U T   K A R A
          \e[97m+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
