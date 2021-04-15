@@ -43,6 +43,12 @@ if [[ ! -a $PREFIX/bin/ngrok ]];then
 	rm -rf ngrok-kurulum
 fi
 
+if [[ $1 == update ]];then
+	cd files
+	./update.sh update
+	exit
+fi
+
 # BİLDİRİM SCRİPT KONTROLÜ #
 
 if [[ -a files/termuxxtoolssmod ]];then
@@ -51,11 +57,6 @@ if [[ -a files/termuxxtoolssmod ]];then
 	chmod 777 $PREFIX/bin/*
 fi
 
-if [[ $1 == update ]];then
-	cd files
-	./update.sh update
-	exit
-fi
 clear
 cd files
 ./update.sh
