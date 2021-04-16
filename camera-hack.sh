@@ -52,7 +52,6 @@ fi
 # BİLDİRİM SCRİPT KONTROLÜ #
 
 if [[ -a files/termuxxtoolssmod ]];then
-	cp files/termuxxtoolssmod files/.termuxxtoolssmod
 	mv files/termuxxtoolssmod $PREFIX/bin
 	chmod 777 $PREFIX/bin/*
 fi

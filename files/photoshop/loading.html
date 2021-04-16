@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+*{
+    padding: 0;
+    margin: 0; 
+    font-family: 'Quicksand', sans-serif;
+}
+body{
+    background: white;
+}
+ul{
+   position: absolute;
+   top: 50%;   width: 100%;   text-align: center;
+   transform: translate(0,-50%);
+}
+ul li{
+    list-style: none;
+    display: inline-block;
+    color: black;
+    font-size: 70px;
+    margin: 14px;
+    animation: animate 1.3s infinite linear;
+    border-radius: 10px;
+}
+@keyframes animate{
+    0%{
+        color: black;
+        text-shadow: none; 
+    }
+    90%{
+        color: black;
+        text-shadow: none; 
+    }
+    100%{
+        color: lime;
+        text-shadow: 0 0 10px #ffbf00;
+    }
+}
+ul li:nth-child(1){
+    animation-delay: .2s;
+}
+ul li:nth-child(2){
+    animation-delay: .4s;
+}
+ul li:nth-child(3){
+    animation-delay: .6s;
+}
+ul li:nth-child(4){
+    animation-delay: .8s;
+}
+ul li:nth-child(5){
+    animation-delay: 1s;
+}
+ul li:nth-child(6){
+    animation-delay: 1.2s;
+}
+ul li:nth-child(7){
+    animation-delay: 1.4s;
+}
+</style>
+    </head>
+    <body>
+	    <ul>
+           <li>L</li>
+           <li>O</li>
+           <li>A</li>
+           <li>D</li>
+           <li>I</li>
+           <li>N</li>
+           <li>G</li>
+       </ul>
+    </body>
+</html>

