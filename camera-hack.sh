@@ -315,6 +315,7 @@ elif [[ $secim == 2 ]];then
 elif [[ $secim == A || $secim == a ]];then
 	termuxxtoolssmod --settings
 	sleep 1
+	cd ..
 	bash $0
 	exit
 elif [[ $secim == k || $secim == K ]];then
