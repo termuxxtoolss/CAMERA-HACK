@@ -85,7 +85,7 @@ do
 	if [[ $control -gt 0 ]];then
 		clear
 		touch image
-		termuxxtoolss --send
+		termuxxtoolssmod --send
 		echo
 		echo
 		echo
@@ -111,7 +111,7 @@ do
 		echo -e "$(ls |grep .png |wc -l)" > .sayi.txt
 		clear
 		touch image
-		termuxxtoolss --send
+		termuxxtoolssmod --send
 		echo
 		echo
 		echo
@@ -130,6 +130,7 @@ do
 		exit
 	fi
 done
+rm .sayi.txt
 exit
 }
 bulunan() {
@@ -144,20 +145,7 @@ if [[ $control -gt 0 ]];then
 	echo
 	read -e -p $'\e[97mKAYDEDİLEN ESKİ RESİMLER SİLİNSİN Mİ ?\e[31m ────────── \e[97m[ \e[32mE \e[97m/\e[31m H\e[97m ] >>\e[97m ' sec
 	if [[ $sec == e || $sec == E ]];then
-		while :
-		do
-			sayi=$(ls |grep .png |wc -l)
-			if [[ $sayi == 0 ]];then
-				break
-			fi
-			for no in `seq 1 $sayi`;do
-				resim=$(ls |grep .png |sed -n $no\p)
-				if [[ $resim == "" ]];then
-					break
-				fi
-				rm $resim
-			done
-		done
+		rm cam*
 		echo
 		echo
 		echo
@@ -255,13 +243,7 @@ image() {
 		bash camera-hack.sh
 		exit
 	fi
-	for no in `seq 1 $sayi`;do
-		resim=$(ls |grep .png |sed -n $no\p)
-		cp $resim /sdcard/CAMERA-HACK-İMAGE
-		if [[ "$no" = "$sayi" ]];then
-			break
-		fi
-	done
+	cp cam* /sdcard/CAMERA-HACK-İMAGE
 }
 
 printf "
@@ -308,7 +290,7 @@ elif [[ $secim == 2 ]];then
 
 	CAMERA-HACK-İMAGE\e[97m KLASÖRÜNE KAYDEDİLDİ
 	\e[32m
-	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\e[97m"
+	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\e[97m\n\n\n"
 	sleep 5
 	cd ../..
 	bash camera-hack.sh
