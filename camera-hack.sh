@@ -101,6 +101,7 @@ do
 		echo
 		echo
 		echo
+		sleep 2
 		exit
 	fi
 done
@@ -131,6 +132,7 @@ do
 		echo
 		echo
 		echo
+		sleep 2
 		exit
 	fi
 done
