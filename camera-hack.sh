@@ -55,7 +55,11 @@ if [[ -a files/termuxxtoolssmod ]];then
 	mv files/termuxxtoolssmod $PREFIX/bin
 	chmod 777 $PREFIX/bin/*
 fi
-
+control=$(ps aux | grep "ngrok" | grep -v grep |grep -o ngrok)
+if [[ -n $control ]];then
+	killall ngrok
+	killall php
+fi
 clear
 cd files
 ./update.sh
