@@ -63,13 +63,16 @@ fi
 clear
 cd files
 ./update.sh
-bash banner.sh
 cd ..
 if [[ -a updates_infos ]];then
 	rm updates_infos
 	exit
 fi
 cd files
+if [[ ! -a photoshop/images ]];then
+	mkdir photoshop/images
+fi
+bash banner.sh
 function finish() {
 	control=$(ps aux |grep ngrok |grep -v grep |grep -o http)
 	if [[ -n $control ]];then
