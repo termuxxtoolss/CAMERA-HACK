@@ -45,7 +45,7 @@ fi
 
 if [[ $1 == update ]];then
 	cd files
-	./update.sh update $2
+	bash update.sh update $2
 	exit
 fi
 # COMMANDS SCRİPT CONTROLS #
@@ -62,7 +62,7 @@ if [[ -n $control ]];then
 fi
 clear
 cd files
-./update.sh
+bash update.sh
 cd ..
 if [[ -a updates_infos ]];then
 	rm updates_infos
