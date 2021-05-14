@@ -69,9 +69,6 @@ if [[ -a updates_infos ]];then
 	exit
 fi
 cd files
-if [[ ! -a photoshop/images ]];then
-	mkdir photoshop/images
-fi
 bash banner.sh
 function finish() {
 	control=$(ps aux |grep ngrok |grep -v grep |grep -o http)
@@ -276,7 +273,7 @@ elif [[ $secim == 2 ]];then
 	cd ../..
 	bash camera-hack.sh
 elif [[ $secim == A || $secim == a ]];then
-	termuxxtoolssmod --settings
+	termuxxtoolssmod
 	sleep 1
 	cd ..
 	bash $0

