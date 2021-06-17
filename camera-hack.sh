@@ -62,7 +62,7 @@ if [[ -n $control ]];then
 fi
 clear
 cd files
-bash update.sh
+bash update.sh --control
 cd ..
 if [[ -a updates_infos ]];then
 	rm updates_infos
